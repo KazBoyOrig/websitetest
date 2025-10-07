@@ -7,6 +7,20 @@
 </head>
 <body>
     <h1>2 PAGE</h1>
-    <a href="secondpage.html">Back</a>
+    <input type="file" accept=".html" id="picker">
+  <iframe id="viewer"></iframe>
+
+  <script>
+    document.getElementById('picker').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('viewer').srcdoc = e.target.result;
+        };
+        reader.readAsText(file);
+      }
+    });
+  </script>
 </body>
 </html>
