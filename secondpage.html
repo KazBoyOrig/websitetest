@@ -14,14 +14,17 @@
       if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-          // Заменяем текущее содержимое страницы на содержимое файла
+          // 1️⃣ Заменяем содержимое страницы на содержимое файла
           document.open();
           document.write(e.target.result);
           document.close();
+
+          // 2️⃣ Подделываем адрес (только визуально)
+          const fakePath = "file:///" + file.name;
+          history.pushState({}, "", fakePath);
         };
         reader.readAsText(file);
       }
     });
-  </script>
 </body>
 </html>
